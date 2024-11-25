@@ -351,7 +351,7 @@ class Dataset_M4(Dataset):
         insample = np.zeros((self.seq_len, 1))
         insample_mask = np.zeros((self.seq_len, 1))
         outsample = np.zeros((self.pred_len + self.label_len, 1))
-        outsample_mask = np.zeros((self.pred_len + self.label_len, 1))  # m4 dataset
+        outsample_mask = np.zeros((self.pred_len + self.label_len, 1))  # m4 datasets
 
         sampled_timeseries = self.timeseries[index]
         cut_point = np.random.randint(low=max(1, len(sampled_timeseries) - self.window_sampling_limit),

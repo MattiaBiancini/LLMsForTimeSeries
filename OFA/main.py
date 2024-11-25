@@ -36,7 +36,7 @@ parser = argparse.ArgumentParser(description='GPT4TS')
 parser.add_argument('--model_id', type=str, required=True, default='test')
 parser.add_argument('--checkpoints', type=str, default='./checkpoints/')
 
-parser.add_argument('--root_path', type=str, default='./dataset/traffic/')
+parser.add_argument('--root_path', type=str, default='./datasets/traffic/')
 parser.add_argument('--data_path', type=str, default='traffic.csv')
 parser.add_argument('--data', type=str, default='custom')
 parser.add_argument('--features', type=str, default='M')

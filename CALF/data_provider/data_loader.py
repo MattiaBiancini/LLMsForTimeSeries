@@ -378,7 +378,7 @@ class Dataset_M4(Dataset):
         insample = np.zeros((self.seq_len, 1))
         insample_mask = np.zeros((self.seq_len, 1))
         outsample = np.zeros((self.pred_len + self.label_len, 1))
-        outsample_mask = np.zeros((self.pred_len + self.label_len, 1))  # m4 dataset
+        outsample_mask = np.zeros((self.pred_len + self.label_len, 1))  # m4 datasets
 
         sampled_timeseries = self.timeseries[index]
         cut_point = np.random.randint(low=max(1, len(sampled_timeseries) - self.window_sampling_limit),
@@ -617,7 +617,7 @@ class SWATSegLoader(Dataset):
 
     def __len__(self):
         """
-        Number of images in the object dataset.
+        Number of images in the object datasets.
         """
         if self.flag == "train":
             return (self.train.shape[0] - self.win_size) // self.step + 1
@@ -707,7 +707,7 @@ class UEAloader(Dataset):
             pattern='*.ts'
             raise Exception("No .ts files found using pattern: '{}'".format(pattern))
 
-        all_df, labels_df = self.load_single(input_paths[0])  # a single file contains dataset
+        all_df, labels_df = self.load_single(input_paths[0])  # a single file contains datasets
 
         return all_df, labels_df
 

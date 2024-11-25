@@ -1,4 +1,5 @@
 export CUDA_VISIBLE_DEVICES="0,1,2,3"
+alias python=python3
 
 percent=100
 patience=10 

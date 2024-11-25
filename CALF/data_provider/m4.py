@@ -79,9 +79,9 @@ class M4Dataset:
     values: np.ndarray
 
     @staticmethod
-    def load(training: bool = True, dataset_file: str = '../dataset/m4') -> 'M4Dataset':
+    def load(training: bool = True, dataset_file: str = '../datasets/m4') -> 'M4Dataset':
         """
-        Load cached dataset.
+        Load cached datasets.
 
         :param training: Load training part if training is True, test part otherwise.
         """

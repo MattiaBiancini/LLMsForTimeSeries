@@ -56,7 +56,7 @@ class M4Summary:
 
     def evaluate(self):
         """
-        Evaluate forecasts using M4 test dataset.
+        Evaluate forecasts using M4 test datasets.
 
         :param forecast: Forecasts. Shape: timeseries, time.
         :return: sMAPE and OWA grouped by seasonal patterns.

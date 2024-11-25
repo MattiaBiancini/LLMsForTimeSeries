@@ -365,6 +365,6 @@ def load_content(args):
         file = 'ETT'
     else:
         file = args.data
-    with open('./dataset/prompt_bank/{0}.txt'.format(file), 'r') as f:
+    with open('./datasets/prompt_bank/{0}.txt'.format(file), 'r') as f:
         content = f.read()
     return content
