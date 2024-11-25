@@ -1,3 +1,4 @@
+from OFA.models import Collector
 from data_provider.data_factory import data_provider
 from utils.tools import EarlyStopping, adjust_learning_rate, visual, vali, test
 from tqdm import tqdm
@@ -95,6 +96,9 @@ if args.save_file_name is not None :
 
 device_address = 'cuda:'+str(args.gpu_loc)
 
+method = "OFA"
+script_name = f"{args.method}"
+pred_len = f"{args.pred_len}"
 
 # log_fine_name='NLinear_336_96.txt'
 
@@ -274,7 +278,12 @@ maes = np.array(maes)
 mses = np.array(mses)
 print("mse_mean = {:.4f}, mse_std = {:.4f}".format(np.mean(mses), np.std(mses)))
 print("mae_mean = {:.4f}, mae_std = {:.4f}".format(np.mean(maes), np.std(maes)))
-    
+
+mae = round(np.mean(maes), 4)
+mse = round(np.mean(mses), 4)
+
+Collector.append_to_csv(method, script_name, pred_len, mae, mse)
+
 with open(log_fine_name , 'a') as f : 
     f.write("{}\n".format(args.model_id))
     # f.write("mae{}\n".format(str(maes)))

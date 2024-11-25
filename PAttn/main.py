@@ -1,3 +1,4 @@
+from PAttn.models import Collector
 from data_provider.data_factory import data_provider
 from utils.tools import EarlyStopping, adjust_learning_rate, visual, vali, test
 from tqdm import tqdm
@@ -90,6 +91,9 @@ if args.save_file_name is not None :
 
 device_address = 'cuda:'+str(args.gpu_loc)
 
+method = "PAttn"
+script_name = f"{args.method}"
+pred_len = f"{args.pred_len}"
 
 def select_optimizer(model ,args):
     param_dict = [
@@ -233,9 +237,14 @@ for ii in range(args.itr):
 if len(maes)==0 : exit()
 maes = np.array(maes)
 mses = np.array(mses)
+
 print("mse_mean = {:.4f}, mse_std = {:.4f}".format(np.mean(mses), np.std(mses)))
 print("mae_mean = {:.4f}, mae_std = {:.4f}".format(np.mean(maes), np.std(maes)))
-    
+
+mae = round(np.mean(maes), 4)
+mse = round(np.mean(mses), 4)
+Collector.append_to_csv(method, script_name, pred_len, mae, mse)
+
 with open(log_fine_name , 'a') as f : 
     f.write("{}\n".format(args.model_id))
     f.write("mae:{:.4f}, std:{:.4f} ---- mse:{:.4f}, std:{:.4f}\n".format(np.mean(maes), np.std(maes) , np.mean(mses), np.std(mses)))
