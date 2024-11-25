@@ -1,4 +1,4 @@
-from PAttn.models import Collector
+from models import Collector
 from data_provider.data_factory import data_provider
 from utils.tools import EarlyStopping, adjust_learning_rate, visual, vali, test
 from tqdm import tqdm

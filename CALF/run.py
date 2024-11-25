@@ -2,7 +2,7 @@ import argparse
 import os
 import torch
 
-from CALF.models import Collector
+from models import Collector
 from exp.exp_long_term_forecasting import Exp_Long_Term_Forecast
 from exp.exp_imputation import Exp_Imputation
 from exp.exp_short_term_forecasting import Exp_Short_Term_Forecast
