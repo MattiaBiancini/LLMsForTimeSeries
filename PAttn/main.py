@@ -241,8 +241,8 @@ mses = np.array(mses)
 print("mse_mean = {:.4f}, mse_std = {:.4f}".format(np.mean(mses), np.std(mses)))
 print("mae_mean = {:.4f}, mae_std = {:.4f}".format(np.mean(maes), np.std(maes)))
 
-mae = round(np.mean(maes), 4)
-mse = round(np.mean(mses), 4)
+mae = round(np.mean(maes), 5)
+mse = round(np.mean(mses), 5)
 Collector.append_to_csv(method, script_name, pred_len, mae, mse)
 
 with open(log_fine_name , 'a') as f : 

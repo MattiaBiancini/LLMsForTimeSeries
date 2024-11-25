@@ -6,6 +6,7 @@ from torch import nn, optim
 from torch.optim import lr_scheduler
 from tqdm import tqdm
 
+from models import Collector
 from models import TimeLLM
 
 from data_provider.data_factory import data_provider
@@ -103,6 +104,10 @@ args = parser.parse_args()
 ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=True)
 deepspeed_plugin = DeepSpeedPlugin(hf_ds_config='./ds_config_zero2.json')
 accelerator = Accelerator(kwargs_handlers=[ddp_kwargs], deepspeed_plugin=deepspeed_plugin)
+
+method = "Time-LLM"
+script_name = f"{args.method}"
+pred_len = f"{args.pred_len}"
 
 for ii in range(1):
     # setting record of experiments
@@ -285,6 +290,10 @@ for ii in range(1):
             with open('hyper_count.txt' , 'a') as f : 
                 f.write(args.model_id+' -- itCosts:{}:modelSize:{}:\n'.format(time.time() - time_beg , total_params) )
         else:
+            mae = round(np.mean(maes), 5)
+            mse = round(np.mean(mses), 5)
+
+            Collector.append_to_csv(method, script_name, pred_len, mae, mse)
             with open( args.model_comment+'.txt' , 'a') as f : 
                 f.write(args.model_id +'\n')
                 f.write("Epoch:{} mae:{} mse:{}\n".format(epoch , round(np.min(maes) , 4 ) , round(np.min(mses) , 4 ) ))

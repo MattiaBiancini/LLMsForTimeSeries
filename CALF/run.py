@@ -1,6 +1,8 @@
 import argparse
 import os
 import torch
+
+from CALF.models import Collector
 from exp.exp_long_term_forecasting import Exp_Long_Term_Forecast
 from exp.exp_imputation import Exp_Imputation
 from exp.exp_short_term_forecasting import Exp_Short_Term_Forecast
@@ -148,7 +150,11 @@ if __name__ == '__main__':
 
     # print('Args in experiment:')
     # print_args(args)
-    
+
+    method = "CALF"
+    script_name = f"{args.method}"
+    pred_len = f"{args.pred_len}"
+
     print( 'gpu counts : ' , torch.cuda.device_count())
 
     if args.task_name == 'long_term_forecast':
@@ -263,6 +269,12 @@ if __name__ == '__main__':
                 torch.cuda.empty_cache()
 
             if len(maes) ==0 : exit()
+
+            mae = round(np.mean(maes), 5)
+            mse = round(np.mean(mses), 5)
+
+            Collector.append_to_csv(method, script_name, pred_len, mae, mse)
+
             with open(args.log_fine_name , 'a') as f : 
                 f.write(args.model_id + '\n')
                 mae = str(round(np.mean(maes), 5))
